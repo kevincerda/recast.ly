@@ -5,21 +5,19 @@ class App extends React.Component {
       data: [],
       handle: false,
       currentVideo: {},
-      query: "kiwi"
+      query: "real kiwi hour"
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
   componentDidMount() {
-    this.searchYouTube("kiwi");
+    this.searchYouTube(this.state.query);
   }
   handleInput(query) {
-    console.log("handleInput Fired");
     this.setState({ query: query });
     this.searchYouTube(this.state.query);
   }
   handleSelect(video) {
-    console.log("handleSelect Fired");
     this.setState({ currentVideo: video });
   }
   searchYouTube(query) {
@@ -37,9 +35,6 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
   render() {
-    {
-      console.log(this.state.query);
-    }
     return (
       <div>
         {this.state.handle && (
@@ -54,7 +49,10 @@ class App extends React.Component {
                 <VideoPlayer video={this.state.currentVideo} />
               </div>
               <div className="col-md-5">
-                <VideoList videos={this.state.data.items} />
+                <VideoList
+                  select={this.handleSelect}
+                  videos={this.state.data.items}
+                />
               </div>
             </div>
           </div>

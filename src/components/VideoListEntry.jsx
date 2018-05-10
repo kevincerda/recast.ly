@@ -2,6 +2,11 @@ class VideoListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.selection = this.selection.bind(this);
+  }
+  selection() {
+    console.log(this.props.video);
+    this.props.select(this.props.video);
   }
   render() {
     return (
@@ -10,10 +15,11 @@ class VideoListEntry extends React.Component {
           <img
             className="media-object"
             src={this.props.video.snippet.thumbnails.default.url}
+            onClick={this.selection}
           />
         </div>
         <div className="media-body">
-          <div className="video-list-entry-title">
+          <div onClick={this.selection} className="video-list-entry-title">
             {this.props.video.snippet.title}
           </div>
           <div className="video-list-entry-detail">

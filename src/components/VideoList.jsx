@@ -9,7 +9,9 @@ class VideoList extends React.Component {
     return (
       <div className="video-list">
         <div>
-          {this.props.videos.map(video => <VideoListEntry video={video} />)}
+          {this.props.videos.map(video => (
+            <VideoListEntry select={this.props.select} video={video} />
+          ))}
         </div>
       </div>
     );

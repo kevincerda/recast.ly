@@ -2,13 +2,21 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: "kiwi"
+      input: "real kiwi hour"
     };
     this.search = this.search.bind(this);
+    this.click = this.click.bind(this);
   }
   search(e) {
-    this.props.handleInput(e.target.value);
     this.setState({ input: e.target.value });
+    const debounce = _.debounce(this.props.handleInput, 500, {
+      leading: false,
+      trailing: true
+    });
+    debounce(e.target.value);
+  }
+  click() {
+    this.props.handleInput(this.state.input);
   }
   render() {
     return (
@@ -19,7 +27,7 @@ class Search extends React.Component {
           value={this.state.input}
           type="text"
         />
-        <button className="btn hidden-sm-down">
+        <button onClick={this.click} className="btn hidden-sm-down">
           <span className="glyphicon glyphicon-search" />
         </button>
       </div>
